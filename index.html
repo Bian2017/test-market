@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+        }
+
+        .warning {
+            color: #ff0000;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>价格计算器</h2>
+        <input type="number" id="priceInput" placeholder="请输入价格" step="0.01">
+        <div id="warning" class="warning"></div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const priceInput = document.getElementById('priceInput');
+        const results = document.getElementById('results');
+        const warning = document.getElementById('warning');
+
+        priceInput.addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                calculatePrices();
+            }
+        });
+
+        function calculatePrices() {
+            const basePrice = parseFloat(priceInput.value);
+            if (isNaN(basePrice)) {
+                results.innerHTML = '<p>请输入有效的价格</p>';
+                warning.innerHTML = '';
+                return;
+            }
+
+            const percentages = [103, 103.5, 105.5, 107.5];
+            let resultHTML = '';
+
+            percentages.forEach(percentage => {
+                const calculatedPrice = (basePrice * percentage / 100).toFixed(2);
+                resultHTML += `<div class="result-item">${percentage}%: ¥${calculatedPrice}</div>`;
+            });
+
+            results.innerHTML = resultHTML;
+
+            if (basePrice >= 30) {
+                warning.innerHTML = '⚠️警告，盈亏比不合适，仓位不超过1/10';
+            } else {
+                warning.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
