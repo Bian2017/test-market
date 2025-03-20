@@ -56,9 +56,11 @@
         <input type="number" id="priceInput" placeholder="请输入价格" step="0.01">
         <div id="warning" class="warning"></div>
         <div id="results"></div>
-        <div>1. 正常：4% 1/4；3.5% 1/10；不符合要求，则至少4.5%；</div>
-        <div>2. 红断、绿断要结合方向</div>
-        <div>3. 数据统计来看：首红断、首绿断都不适合参与，胜率低、盈亏比低！！！ </div>
+        <div>1. 弱竞300：4% 环境好，1/2。环境不好，1/4；</div>
+        <div>2. 强竞300：4.2%, 1/4; </div>
+        <div>3. 不满300，大于100：4.5%， 1/4；</div>
+        <div>4. 红断、绿断要结合方向，环境好，胜率高。环境不好，不参与；</div>
+        <div>5. 数据统计来看：首红断、首绿断都不适合参与，胜率低、盈亏比低！！！ </div>
     </div>
 
     <script>
@@ -80,7 +82,7 @@
                 return;
             }
 
-            const percentages = [103, 103.5, 104，104.5, 105.5, 107.5];
+            const percentages = [103.5, 104, 104.2, 104.5, 105.5, 107.5];
             let resultHTML = '';
 
             percentages.forEach(percentage => {
